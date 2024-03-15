@@ -2,8 +2,8 @@
     <div>
         <h2>Login</h2>
         <form @submit.prevent="loginUser">
-            <label for="user">User</label>
-            <input type="text" id="usernsme" v-model="username" required>
+            <label for="username">Username</label>
+            <input type="text" id="username" v-model="username" required>
 
             <label for="password">Password</label>
             <input type="password" id="password" v-model="password" required>
@@ -33,11 +33,20 @@ export default
                     username: this.username,
                     password: this.password
                 });
-                console.log('User registered successfully!', response.data);
+
+                if (response.data.token) {
+                    //store the token in local storage
+                    localStorage.setItem('token', response.data.token);
+                    
+                    //redirect to dashboard
+                    this.$router.push('/dashboard');
+                } else {
+                    console.log('invalid username or password.');
+                }
             } catch (error) {
-                console.error('Error registering user:', error)
+                console.error('Error logging in:', error);
             }
         }
     }
-}
+};
 </script>

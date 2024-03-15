@@ -1,20 +1,20 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { createRouter , createWebHistory} from 'vue-router'
 import HomePage from './views/HomePage.vue'
 import LoginPage from './views/LoginPage.vue'
+import DashboardPage from './views/DashboardPage.vue'
 
-Vue.useAttrs(Router);
+
 
 const routes = 
 [
     { path: '/', component: HomePage },
     { path: '/login', component: LoginPage },
-    { path:'/dashboard', component: Dashboard,meta: { requiresAuth: true }}
+    { path:'/dashboard', component: DashboardPage,meta: { requiresAuth: true }}
 ];
 
-const router = new Router({
-    mode: 'history',
-    routes
+const router = createRouter({
+    history: createWebHistory(),
+    routes,
 });
 
 // Route guard to check if the user is authenticated before accesing protected routes

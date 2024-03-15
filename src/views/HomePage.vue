@@ -25,14 +25,17 @@ export default {
     },
 
     methods: {
-        registerUser() {
-            axios.post('',{
-                username: this.username,
-                password: this.password
-            });
-            console.log('User registered successfully!', response.data);
+        async registerUser() {
+            try {
+                const response = await axios.post('',{
+                    username: this.username,
+                    password: this.password
+                });
+                console.log('User registered successfully!', response.data);
+            } catch (error) {
+                console.error('Error registering user:', error);
+            }
         }
-            // console.error('Error registering user:', error)
     }
 };
 </script>
